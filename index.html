@@ -3,184 +3,174 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Social Post Formatter — Demo</title>
+<title>Social Post Formatter</title>
 <style>
-:root{--maxw:900px;--accent:#0b79ff}
-body{font-family:system-ui,Segoe UI,Arial;line-height:1.4;padding:20px;background:#f6f8fa}
-.container{max-width:var(--maxw);margin:0 auto;background:white;padding:20px;border-radius:10px;box-shadow:0 6px 18px rgba(10,10,10,0.06)}
-h1{margin-top:0}
-textarea{width:100%;min-height:140px;padding:10px;border:1px solid #ddd;border-radius:6px;font-size:14px;resize:vertical}
-.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
-button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:6px;cursor:pointer}
-button.secondary{background:#eee;color:#111}
-.platforms{display:flex;gap:12px;align-items:center}
-.output{margin-top:16px;display:grid;gap:12px}
-.card{border:1px solid #ececec;padding:10px;border-radius:8px;background:#fafafa}
-pre{white-space:pre-wrap;font-family:inherit;margin:0}
-.copy{float:right;background:#111;color:#fff;padding:6px 8px;border-radius:6px;border:none;cursor:pointer}
-.small{font-size:13px;color:#555}
-.footer{margin-top:12px;font-size:13px;color:#666}
+/* Global look */
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2c1f63, #0d47a1);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px 20px;
+}
+
+/* Main card */
+.container {
+  background: #fff;
+  color: #111;
+  max-width: 900px;
+  width: 100%;
+  border-radius: 18px;
+  padding: 40px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  text-align: center;
+  animation: fadeUp 0.6s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(30px);}
+  to { opacity:1; transform: translateY(0);}
+}
+
+/* Headings */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg,#6a11cb,#2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+p.sub {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Textarea */
+textarea {
+  width: 100%;
+  min-height: 160px;
+  padding: 14px;
+  border: 2px solid #eee;
+  border-radius: 12px;
+  font-size: 15px;
+  resize: vertical;
+  outline: none;
+  transition: border 0.2s;
+}
+textarea:focus { border-color: #6a11cb; }
+
+/* Controls */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.platforms label {
+  margin-right: 15px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg,#6a11cb,#2575fc);
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: transform 0.15s ease;
+}
+button:hover { transform: translateY(-2px); }
+button.secondary {
+  background: #f0f0f0;
+  color: #222;
+}
+
+/* Output cards */
+.output { margin-top: 25px; display: grid; gap: 18px; }
+.card {
+  background: #fafafa;
+  border-radius: 14px;
+  padding: 16px;
+  text-align: left;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+.card strong {
+  font-size: 1.1rem;
+  background: linear-gradient(90deg,#6a11cb,#2575fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+pre {
+  white-space: pre-wrap;
+  font-family: inherit;
+  margin: 8px 0 0;
+}
+.copy {
+  float: right;
+  background: #111;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+.copy:hover { background: #444; }
+
+/* Footer */
+.footer {
+  margin-top: 25px;
+  font-size: 0.85rem;
+  color: #666;
+}
 </style>
 </head>
 <body>
-<div class="container">
-  <h1>Social Post Formatter (Demo)</h1>
-  <p class="small">Paste your idea and choose platforms. Everything runs in your browser (no server).</p>
+  <div class="container">
+    <h1>Social Post Formatter</h1>
+    <p class="sub">Transform one idea into platform-ready posts for X, LinkedIn, and Instagram.</p>
 
-  <textarea id="input" placeholder="Paste your raw post or idea here..."></textarea>
+    <textarea id="input" placeholder="Paste your raw idea here..."></textarea>
 
-  <div class="controls">
-    <div class="platforms">
-      <label><input type="checkbox" id="platform-x" checked> X (Twitter)</label>
-      <label><input type="checkbox" id="platform-linkedin" checked> LinkedIn</label>
-      <label><input type="checkbox" id="platform-instagram" checked> Instagram</label>
+    <div class="controls">
+      <div class="platforms">
+        <label><input type="checkbox" id="platform-x" checked> X</label>
+        <label><input type="checkbox" id="platform-linkedin" checked> LinkedIn</label>
+        <label><input type="checkbox" id="platform-instagram" checked> Instagram</label>
+      </div>
+      <div>
+        <button id="formatBtn">Format</button>
+        <button id="clearBtn" class="secondary">Clear</button>
+      </div>
     </div>
-    <div style="margin-left:auto">
-      <button id="formatBtn">Format</button>
-      <button id="clearBtn" class="secondary">Clear</button>
-    </div>
+
+    <div id="outputs" class="output"></div>
+    <div class="footer">Free MVP — runs entirely in your browser. No logins, no tracking.</div>
   </div>
 
-  <div id="outputs" class="output"></div>
-
-  <div class="footer">Tip: This is a client-side MVP. To add accounts, storage or payments later you’ll add a backend.</div>
-</div>
-
 <script>
-/* Simple client-side formatting logic (MVP). No external APIs. */
-
-// small stopword set
-const STOPWORDS = new Set([
-  'the','and','for','that','with','this','from','have','are','was','but','you','not','your','has','its','can','our','will','they','their','them','what','which','when','where','who','why','how','a','an','of','to','in','on','by','is','it'
-]);
-
-function extractKeywords(text, topN=5){
-  if(!text) return [];
-  const words = text.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/)
-    .filter(w=>w && !STOPWORDS.has(w) && w.length>2);
-  const freq = {};
-  for(const w of words) freq[w] = (freq[w]||0)+1;
-  return Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,topN).map(e=>e[0]);
-}
-
-function generateHashtags(keywords){
-  if(!keywords || keywords.length===0) return '';
-  return keywords.map(k=>'#'+k.replace(/\s+/g,'')).join(' ');
-}
-
-function splitByLimit(text, limit=250){
-  if(!text) return [];
-  const sents = text.match(/[^.!?]+[.!?]*\s*/g) || [text];
-  const chunks = [];
-  let current = '';
-  for(const s of sents){
-    if((current + s).trim().length <= limit){
-      current += s;
-    } else {
-      if(current.trim()) chunks.push(current.trim());
-      if(s.trim().length <= limit){
-        current = s;
-      } else {
-        // fallback: split long sentence by words
-        const words = s.split(/\s+/);
-        let part = '';
-        for(const w of words){
-          if((part + ' ' + w).trim().length <= limit) part = (part + ' ' + w).trim();
-          else { if(part) chunks.push(part); part = w; }
-        }
-        current = part;
-      }
-    }
-  }
-  if(current.trim()) chunks.push(current.trim());
-  return chunks;
-}
-
-function makeXThread(text){
-  const chunks = splitByLimit(text, 250);
-  if(chunks.length===0) return [];
-  if(chunks.length===1) return [chunks[0]];
-  return chunks.map((c,i)=>`${c} (${i+1}/${chunks.length})`);
-}
-
-function formatLinkedIn(text){
-  const keywords = extractKeywords(text, 5);
-  const tags = generateHashtags(keywords);
-  let body = text.trim();
-  if(body.length > 1300) body = body.slice(0,1297) + '...';
-  return body + (tags ? '\n\n' + tags : '');
-}
-
-function formatInstagram(text){
-  const keywords = extractKeywords(text, 10);
-  const tags = generateHashtags(keywords);
-  const body = text.trim().replace(/\n{2,}/g,'\n\n');
-  return body + (tags ? '\n\n' + tags : '');
-}
-
-function formatAll(text, platforms){
-  const result = {};
-  if(platforms.x) result.x = makeXThread(text);
-  if(platforms.linkedin) result.linkedin = formatLinkedIn(text);
-  if(platforms.instagram) result.instagram = formatInstagram(text);
-  return result;
-}
-
-// UI helpers
-function createOutputCard(title, content){
-  const card = document.createElement('div');
-  card.className = 'card';
-  const h = document.createElement('div');
-  h.innerHTML = `<strong>${title}</strong>`;
-  const copyBtn = document.createElement('button');
-  copyBtn.className = 'copy';
-  copyBtn.textContent = 'Copy';
-  copyBtn.onclick = ()=> {
-    navigator.clipboard.writeText(content).then(()=> {
-      copyBtn.textContent = 'Copied!';
-      setTimeout(()=> copyBtn.textContent = 'Copy', 1200);
-    }).catch(()=> alert('Copy failed — try selecting and Ctrl+C.'));
-  };
-  h.appendChild(copyBtn);
-  const pre = document.createElement('pre');
-  pre.textContent = content;
-  card.appendChild(h);
-  card.appendChild(pre);
-  return card;
-}
-
-document.getElementById('formatBtn').addEventListener('click', ()=> {
-  const text = document.getElementById('input').value;
-  const platforms = {
-    x: document.getElementById('platform-x').checked,
-    linkedin: document.getElementById('platform-linkedin').checked,
-    instagram: document.getElementById('platform-instagram').checked
-  };
-  const outputs = formatAll(text, platforms);
-  const container = document.getElementById('outputs');
-  container.innerHTML = '';
-  if(platforms.x){
-    if(outputs.x.length === 0) {
-      container.appendChild(createOutputCard('X', 'No content'));
-    } else {
-      outputs.x.forEach((t,i) => {
-        const title = outputs.x.length>1 ? `X — thread ${i+1}/${outputs.x.length}` : 'X';
-        container.appendChild(createOutputCard(title, t));
-      });
-    }
-  }
-  if(platforms.linkedin){
-    container.appendChild(createOutputCard('LinkedIn', outputs.linkedin || 'No content'));
-  }
-  if(platforms.instagram){
-    container.appendChild(createOutputCard('Instagram', outputs.instagram || 'No content'));
-  }
-});
-
-document.getElementById('clearBtn').addEventListener('click', ()=> {
-  document.getElementById('input').value = '';
-  document.getElementById('outputs').innerHTML = '';
-});
+/* same JS from before (unchanged) */
+const STOPWORDS = new Set(['the','and','for','that','with','this','from','have','are','was','but','you','not','your','has','its','can','our','will','they','their','them','what','which','when','where','who','why','how','a','an','of','to','in','on','by','is','it']);
+function extractKeywords(text, topN=5){ if(!text) return []; const words=text.toLowerCase().replace(/[^\w\s]/g,'').split(/\s+/).filter(w=>w&&!STOPWORDS.has(w)&&w.length>2); const freq={}; for(const w of words) freq[w]=(freq[w]||0)+1; return Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,topN).map(e=>e[0]); }
+function generateHashtags(keywords){ if(!keywords||keywords.length===0) return ''; return keywords.map(k=>'#'+k.replace(/\s+/g,'')).join(' '); }
+function splitByLimit(text, limit=250){ if(!text) return []; const sents=text.match(/[^.!?]+[.!?]*\s*/g)||[text]; const chunks=[]; let current=''; for(const s of sents){ if((current+s).trim().length<=limit){ current+=s; } else { if(current.trim()) chunks.push(current.trim()); if(s.trim().length<=limit){ current=s; } else { const words=s.split(/\s+/); let part=''; for(const w of words){ if((part+' '+w).trim().length<=limit) part=(part+' '+w).trim(); else { if(part) chunks.push(part); part=w; } } current=part; } } } if(current.trim()) chunks.push(current.trim()); return chunks; }
+function makeXThread(text){ const chunks=splitByLimit(text,250); if(chunks.length===0) return []; if(chunks.length===1) return [chunks[0]]; return chunks.map((c,i)=>`${c} (${i+1}/${chunks.length})`); }
+function formatLinkedIn(text){ const keywords=extractKeywords(text,5); const tags=generateHashtags(keywords); let body=text.trim(); if(body.length>1300) body=body.slice(0,1297)+'...'; return body+(tags?'\n\n'+tags:''); }
+function formatInstagram(text){ const keywords=extractKeywords(text,10); const tags=generateHashtags(keywords); const body=text.trim().replace(/\n{2,}/g,'\n\n'); return body+(tags?'\n\n'+tags:''); }
+function formatAll(text,platforms){ const result={}; if(platforms.x) result.x=makeXThread(text); if(platforms.linkedin) result.linkedin=formatLinkedIn(text); if(platforms.instagram) result.instagram=formatInstagram(text); return result; }
+function createOutputCard(title,content){ const card=document.createElement('div'); card.className='card'; const h=document.createElement('div'); h.innerHTML=`<strong>${title}</strong>`; const copyBtn=document.createElement('button'); copyBtn.className='copy'; copyBtn.textContent='Copy'; copyBtn.onclick=()=>{ navigator.clipboard.writeText(content).then(()=>{ copyBtn.textContent='Copied!'; setTimeout(()=>copyBtn.textContent='Copy',1200); }).catch(()=>alert('Copy failed.')); }; h.appendChild(copyBtn); const pre=document.createElement('pre'); pre.textContent=content; card.appendChild(h); card.appendChild(pre); return card; }
+document.getElementById('formatBtn').addEventListener('click',()=>{ const text=document.getElementById('input').value; const platforms={ x:document.getElementById('platform-x').checked, linkedin:document.getElementById('platform-linkedin').checked, instagram:document.getElementById('platform-instagram').checked }; const outputs=formatAll(text,platforms); const container=document.getElementById('outputs'); container.innerHTML=''; if(platforms.x){ if(outputs.x.length===0){ container.appendChild(createOutputCard('X','No content')); } else { outputs.x.forEach((t,i)=>{ const title=outputs.x.length>1?`X — thread ${i+1}/${outputs.x.length}`:'X'; container.appendChild(createOutputCard(title,t)); }); } } if(platforms.linkedin){ container.appendChild(createOutputCard('LinkedIn',outputs.linkedin||'No content')); } if(platforms.instagram){ container.appendChild(createOutputCard('Instagram',outputs.instagram||'No content')); } });
+document.getElementById('clearBtn').addEventListener('click',()=>{ document.getElementById('input').value=''; document.getElementById('outputs').innerHTML=''; });
 </script>
 </body>
 </html>
